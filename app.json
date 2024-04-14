@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "mycredit",
+    "slug": "hospital",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/dd.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#fff",
+      "padding": 10,
+      "duration": 2500
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mrhumble.hospital"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.mrhumble.hospital"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "558f056e-bb27-4305-9d3f-a96915de2d21"
+      }
+    },
+    "owner": "mrhumble",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/558f056e-bb27-4305-9d3f-a96915de2d21"
+    }
+  }
+}
