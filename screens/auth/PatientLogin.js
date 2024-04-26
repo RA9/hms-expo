@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
-  TextInput,
   Text,
   Pressable,
   StyleSheet,
@@ -11,6 +10,12 @@ import {
 import logo from "../../assets/logo.jpeg";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
+import { styled } from "nativewind";
+import { TextInput } from 'react-native-paper';
+import { useFonts } from "expo-font";
+
+
+
 
 const SubmitButton = ({ onPress, text }) => {
   return (
@@ -19,6 +24,10 @@ const SubmitButton = ({ onPress, text }) => {
     </Pressable>
   );
 };
+
+const StyledText = styled(Text);
+const StyledView = styled(View)
+const StyledImage = styled(Image)
 
 const LoginScreen = () => {
   const [formData, setFormData] = useState({
@@ -37,98 +46,96 @@ const LoginScreen = () => {
     console.log("Form data submitted:", formData);
   };
 
+  const [fontsLoaded, fontError] = useFonts({
+    'Rubik': require("../../assets/Rubik-VariableFont_wght.ttf")
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
   return (
-    <View style={{ height: "100%" }}>
+    <StyledView className="py-24">
       <StatusBar style="auto" />
-      <ImageBackground
+      {/* <ImageBackground
         source={require("../../assets/nss.jpg")}
         style={{
           flex: 1,
           resizeMode: "cover",
           justifyContent: "center",
         }}
-      >
-        <View style={styles.container}>
-          <View style={{ alignItems: "center", justifyContent: "center" }}>
-            {/* <Image
+      > */}
+      <StyledView className="flex items-center justify-center mt-2">
+        <StyledImage source={require("../../assets/clearbg.png")} style={{
+          height: 200,
+          width: 200,
+          resizeMode: "cover"
+        }} className="rounded" />
+      </StyledView>
+      <StyledView className="mx-4 mt-2">
+        {/* <Image
           style={{ width: 200, height: 100, marginBottom: 16 }}
           source={logo}
         /> */}
-            <Text
-              style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}
-            >
-              Patient Login
-            </Text>
-          </View>
-          <View style={{ position: "relative" }}>
-            <TextInput
-              style={styles.input}
-              placeholder="Username"
-              value={formData.username}
-              onChangeText={(text) => handleInputChange("username", text)}
-            />
-            <Text
-              style={{
-                position: "absolute",
-                top: -8,
-                left: 30,
-                backgroundColor: "#fff",
-                paddingHorizontal: 4,
-                color: "gray",
-              }}
-            >
-              Username
-            </Text>
-          </View>
-          <View style={{ position: "relative" }}>
+        <StyledText
+          className="font-bold justify-start text-4xl mb-4 font-['Rubik']"
+        >
+          Login
+        </StyledText>
+      </StyledView>
+      <StyledView className="mx-4 mb-2">
+        <StyledView className="my-4">
           <TextInput
-            style={styles.input}
+            placeholder="Email"
+            value={formData.username}
+            onChangeText={(text) => handleInputChange("username", text)}
+            left={<TextInput.Icon icon="email" />}
+          />
+        </StyledView>
+        <StyledView className="mb-4">
+          <TextInput
             placeholder="Password"
             secureTextEntry={true}
             value={formData.password}
+            left={<TextInput.Icon icon="eye" />}
             onChangeText={(text) => handleInputChange("password", text)}
           />
-           <Text
-              style={{
-                position: "absolute",
-                top: -8,
-                left: 30,
-                backgroundColor: "#fff",
-                paddingHorizontal: 4,
-                color: "gray",
-              }}
-            >
-              Password
-            </Text>
-          </View>
+        </StyledView>
+      </StyledView>
 
-          <SubmitButton onPress={handleSubmit} text="Submit" />
-          {/* signup cta */}
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: 20,
-            }}
-          >
-            <Text style={{ color: "#000" }}>Don't have an account?</Text>
-            <Pressable onPress={() => navigation.navigate("Register")}>
-              <Text style={{ color: "#00f", fontWeight: "bold", fontSize: 18 }}>
-                {" "}
-                Sign Up
-              </Text>
-            </Pressable>
-          </View>
-        </View>
-      </ImageBackground>
-    </View>
+
+      <SubmitButton  onPress={handleSubmit} text="Submit" />
+      {/* signup cta */}
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: 20,
+        }}
+      >
+        <Text style={{ color: "#000" }}>Don't have an account?</Text>
+        <Pressable onPress={() => navigation.navigate("Register")}>
+          <Text style={{ color: "#303080", fontWeight: "bold", fontSize: 18 }}>
+            {" "}
+            Sign Up
+          </Text>
+        </Pressable>
+      </View>
+      {/* </ImageBackground> */}
+    </StyledView>
   );
 };
 
 const submitBtnStyles = StyleSheet.create({
   button: {
-    backgroundColor: "#007bff" /* Blue background */,
+    backgroundColor: "#14c0d8" /* Blue background */,
     padding: 15,
     borderRadius: 5,
     marginHorizontal: 14,
