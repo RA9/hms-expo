@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 
 import { View, Text, Pressable, StyleSheet, ImageBackground } from "react-native";
 import { styled } from "nativewind";
@@ -29,10 +29,29 @@ function GettingStarted() {
 
     ]);
     const [isSlideCompleted, setIsSlideCompleted] = React.useState(false);
+    const [isNext, setIsNext] = React.useState(false);
 
 
     const [index, setIndex] = React.useState(0);
     const navigation = useNavigation();
+
+    useEffect(() => {
+        if (index > 0) {
+            setIsNext(true);
+        } else {
+            setIsNext(false);
+        }
+    }, [index]);
+
+    useEffect(() => {
+        if (index === (info.length - 1)) {
+            setIsSlideCompleted(true);
+        } else {
+            setIsSlideCompleted(false);
+        }
+    }, [index]);
+
+
     const [fontsLoaded, fontError] = useFonts({
         'Rubik': require("../assets/Rubik-VariableFont_wght.ttf")
     });
@@ -48,8 +67,8 @@ function GettingStarted() {
     }
 
     function next() {
-        if (index === info.length - 1) {
-           setIsSlideCompleted(true);
+
+        if (index === (info.length - 1)) {
             return;
         }
         setIndex((index) => index + 1);
@@ -61,6 +80,10 @@ function GettingStarted() {
         }
         setIndex((index) => index - 1);
     }
+
+
+
+    
     const blurhash =
         '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
@@ -86,19 +109,25 @@ function GettingStarted() {
                 </StyledView>
 
                 {
-                    isSlideCompleted ? (
+                    !isSlideCompleted ? (
                         <StyledView className="p-4 py-8 flex flex-row items-center justify-center gap-4 mx-2">
-                            <Pressable className="w-1/2 bg-zinc-900 py-4 px-4 rounded-md" onPress={() => previous()}>
-                                <StyledText className="text-center text-md font-medium text-white font-bold">Previous</StyledText>
-                            </Pressable>
+                            {
+                                isNext ? (
+                                    <Pressable className="w-1/2 bg-zinc-900 py-4 px-4 rounded-md" onPress={() => previous()}>
+                                        <StyledText className="text-center text-md font-medium text-white font-bold">Previous</StyledText>
+                                    </Pressable>
+                                ) : (
+                                   <StyledView className="w-1/2"></StyledView>
+                                )
+                            }
                             <Pressable className="w-1/2 bg-white py-4 px-4 rounded-md" onPress={() => next()}>
                                 <StyledText className="text-center text-md font-medium text-[#303080] font-bold">Next</StyledText>
                             </Pressable>
                         </StyledView>
                     ) : (
                         <StyledView className="p-4 py-8 flex flex-row items-center justify-center gap-4 mx-2">
-                            <Pressable className="w-full bg-white py-4 px-4 rounded-md" onPress={() => next()}>
-                                <StyledText className="text-center text-md font-medium text-[#303080] font-bold">Get Started</StyledText>
+                            <Pressable className="w-full bg-[#14c0d8] py-4 px-4 rounded-md" onPress={() => navigation.navigate("PreLogin")}>
+                                <StyledText className="text-center text-md font-medium text-white font-bold">Get Started</StyledText>
                             </Pressable>
                         </StyledView>
                     )
