@@ -18,6 +18,7 @@ import CreateAppointmentsScreen from "./screens/CreateAppointments";
 import ViewAppointmentsScreen from "./screens/admin/ViewAppointment";
 import CartScreen from "./screens/Cart";
 import CheckoutScreen from "./screens/Checkout";
+import GettingStarted from "./screens/GettingStarted";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          name="GettingStarted"
+          options={{ headerShown: false }}
+          component={GettingStarted}
+        />
         <Stack.Screen
           name="PreLogin"
           options={{ headerShown: false }}
