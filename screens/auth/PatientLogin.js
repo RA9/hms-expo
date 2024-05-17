@@ -92,6 +92,7 @@ const LoginScreen = () => {
       <StyledView className="mx-4 mb-2">
         <StyledView className="my-4">
           <TextInput
+            className="bg-gray-300"
             placeholder="Email"
             value={formData.username}
             onChangeText={(text) => handleInputChange("username", text)}
@@ -100,6 +101,7 @@ const LoginScreen = () => {
         </StyledView>
         <StyledView className="mb-4">
           <TextInput
+            className="bg-gray-300"
             placeholder="Password"
             secureTextEntry={true}
             value={formData.password}
@@ -110,7 +112,7 @@ const LoginScreen = () => {
       </StyledView>
 
 
-      <SubmitButton  onPress={handleSubmit} text="Submit" />
+      <SubmitButton onPress={handleSubmit} text="Submit" />
       {/* signup cta */}
       <View
         style={{

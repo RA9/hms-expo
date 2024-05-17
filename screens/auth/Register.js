@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   View,
-  TextInput,
   Text,
   Pressable,
   StyleSheet,
@@ -12,11 +11,12 @@ import {
 import logo from "../../assets/logo.jpeg";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
-import { RadioButton } from "react-native-paper";
+import { RadioButton, TextInput, Appbar } from "react-native-paper";
+
 
 const SubmitButton = ({ onPress, text }) => {
   return (
-    <Pressable onPress={onPress} style={submitBtnStyles.button}>
+    <Pressable onPress={onPress} className="w-full bg-[#14c0d8] p-4 rounded-lg my-2">
       <Text style={submitBtnStyles.text}>{text}</Text>
     </Pressable>
   );
@@ -43,250 +43,133 @@ const RegisterScreen = () => {
   };
 
   return (
-    <View style={{ height: "100%" }}>
+    <View style={{ height: "100%" }} className="bg-white">
       <StatusBar style="auto" />
-      <ImageBackground
-        source={require("../../assets/nss.jpg")}
-        style={{
-          flex: 1,
-          resizeMode: "cover",
-          justifyContent: "center",
-        }}
-      >
-        <View style={{ marginTop: 140, marginBottom: 60 }}>
-          <View style={styles.container}>
-            {/* Avatar */}
-            <ScrollView>
-              <View
-                style={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  alignContent: "center",
-                  marginTop: 20,
-                  marginBottom: 10,
-                }}
-              >
-                <Image
-                  style={{ width: 160, height: 160, marginBottom: 16 }}
-                  source={{ uri: "https://api.multiavatar.com/BBond.png" }}
-                />
-              </View>
-              <View style={{ position: "relative" }}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="enter your first name"
-                  value={formData.username}
-                  onChangeText={(text) => handleInputChange("username", text)}
-                />
-                <Text
-                  style={{
-                    position: "absolute",
-                    top: -8,
-                    left: 30,
-                    backgroundColor: "#fff",
-                    paddingHorizontal: 4,
-                    color: "gray",
-                  }}
-                >
-                  First Name
-                </Text>
-              </View>
-              <View style={{ position: "relative" }}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="enter your middle name"
-                  value={formData.username}
-                  onChangeText={(text) => handleInputChange("username", text)}
-                />
-                <Text
-                  style={{
-                    position: "absolute",
-                    top: -8,
-                    left: 30,
-                    backgroundColor: "#fff",
-                    paddingHorizontal: 4,
-                    color: "gray",
-                  }}
-                >
-                  Middle Name
-                </Text>
-              </View>
-              <View style={{ position: "relative" }}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="enter your last name"
-                  value={formData.username}
-                  onChangeText={(text) => handleInputChange("username", text)}
-                />
-                <Text
-                  style={{
-                    position: "absolute",
-                    top: -8,
-                    left: 30,
-                    backgroundColor: "#fff",
-                    paddingHorizontal: 4,
-                    color: "gray",
-                  }}
-                >
-                  Last Name
-                </Text>
-              </View>
-              <View style={{ position: "relative" }}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="eg. doe@example.com"
-                  value={formData.username}
-                  onChangeText={(text) => handleInputChange("username", text)}
-                />
-                <Text
-                  style={{
-                    position: "absolute",
-                    top: -8,
-                    left: 30,
-                    backgroundColor: "#fff",
-                    paddingHorizontal: 4,
-                    color: "gray",
-                  }}
-                >
-                  Email
-                </Text>
-              </View>
-              <View style={{ position: "relative" }}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="eg. +231771234567"
-                  value={formData.username}
-                  onChangeText={(text) => handleInputChange("username", text)}
-                />
-                <Text
-                  style={{
-                    position: "absolute",
-                    top: -8,
-                    left: 30,
-                    backgroundColor: "#fff",
-                    paddingHorizontal: 4,
-                    color: "gray",
-                  }}
-                >
-                  Phone Number
-                </Text>
-              </View>
-              <View style={{ position: "relative" }}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="eg. Congo Town, Monrovia, Liberia"
-                  value={formData.username}
-                  onChangeText={(text) => handleInputChange("username", text)}
-                />
-                <Text
-                  style={{
-                    position: "absolute",
-                    top: -8,
-                    left: 30,
-                    backgroundColor: "#fff",
-                    paddingHorizontal: 4,
-                    color: "gray",
-                  }}
-                >
-                  Address
-                </Text>
-              </View>
-              <RadioButton.Group
-                onValueChange={(newValue) => setChecked(newValue)}
-                value={checked}
-              >
-                <RadioButton.Item label="Male" value="male" />
-                <RadioButton.Item label="Female" value="female" />
-              </RadioButton.Group>
-              <View style={{ position: "relative" }}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="eg. 01/01/2000"
-                  secureTextEntry={true}
-                  value={formData.password}
-                  onChangeText={(text) => handleInputChange("password", text)}
-                />
-                <Text
-                  style={{
-                    position: "absolute",
-                    top: -8,
-                    left: 30,
-                    backgroundColor: "#fff",
-                    paddingHorizontal: 4,
-                    color: "gray",
-                  }}
-                >
-                  Date of Birth
-                </Text>
-              </View>
-              <View style={{ position: "relative" }}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Password"
-                  secureTextEntry={true}
-                  value={formData.password}
-                  onChangeText={(text) => handleInputChange("password", text)}
-                />
-                <Text
-                  style={{
-                    position: "absolute",
-                    top: -8,
-                    left: 30,
-                    backgroundColor: "#fff",
-                    paddingHorizontal: 4,
-                    color: "gray",
-                  }}
-                >
-                  Password
-                </Text>
-              </View>
-              <View style={{ position: "relative" }}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Confirm Password"
-                  secureTextEntry={true}
-                  value={formData.password}
-                  onChangeText={(text) => handleInputChange("password", text)}
-                />
-                <Text
-                  style={{
-                    position: "absolute",
-                    top: -8,
-                    left: 30,
-                    backgroundColor: "#fff",
-                    paddingHorizontal: 4,
-                    color: "gray",
-                  }}
-                >
-                  Confirm Password
-                </Text>
-              </View>
-
-              <SubmitButton onPress={handleSubmit} text="Submit" />
-              {/* </View> */}
-              {/* signup cta */}
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginVertical: 20,
-                }}
-              >
-                <Text style={{ color: "#000" }}>Do you have an account?</Text>
-                <Pressable onPress={() => alert("Sign Up")}>
-                  <Text
-                    style={{ color: "#00f", fontWeight: "bold", fontSize: 18 }}
-                  >
-                    {" "}
-                    Login
-                  </Text>
-                </Pressable>
-              </View>
-            </ScrollView>
-          </View>
+      <Appbar.Header className="bg-white"> 
+        <Appbar.Action icon="arrow-left" onPress={() => navigation.navigate("Login")} />
+        <Appbar.Content title="Create an account" />
+        {/* <Appbar.Action icon="magnify" onPress={() => {}} /> */}
+        {/* <Appbar.Action icon={MORE_ICON} onPress={() => {}} /> */}
+      </Appbar.Header>
+      <ScrollView className="mx-4 my-8">
+        <View className="flex items-center gap-4 my-2">
         </View>
-      </ImageBackground>
+        <View className="my-2">
+          <TextInput
+            className="bg-gray-300"
+            placeholder="First Name"
+            value={formData.username}
+            textContentType="givenName"
+            autoComplete="given-name"
+            onChangeText={(text) => handleInputChange("username", text)}
+          />
+        </View>
+        <View className="my-2">
+          <TextInput
+            className="bg-gray-300"
+            placeholder="Middle Name"
+            textContentType="middleName"
+            autoComplete="middle-name"
+            value={formData.username}
+            onChangeText={(text) => handleInputChange("username", text)}
+          />
+        </View>
+        <View className="my-2">
+          <TextInput
+            className="bg-gray-300"
+            placeholder="Last Name"
+            textContentType="familyName"
+            autoComplete="family-name"
+            value={formData.username}
+            onChangeText={(text) => handleInputChange("username", text)}
+          />
+        </View>
+        <View className="my-2">
+          <TextInput
+            className="bg-gray-300"
+            placeholder="Email"
+            textContentType="emailAddress"
+            autoComplete="email"
+            value={formData.username}
+            onChangeText={(text) => handleInputChange("username", text)}
+          />
+        </View>
+        <View className="my-2">
+          <TextInput
+            className="bg-gray-300"
+            placeholder="Phone Number"
+            textContentType="telephoneNumber"
+            autoComplete="tel"
+            value={formData.username}
+            onChangeText={(text) => handleInputChange("username", text)}
+          />
+        </View>
+        <View className="my-2">
+          <TextInput
+            className="bg-gray-300"
+            placeholder="Address"
+            textContentType="streetAddressLine1"
+            autoComplete="street-address"
+            value={formData.username}
+            onChangeText={(text) => handleInputChange("username", text)}
+          />
+        </View>
+        {/* <RadioButton.Group
+          onValueChange={(newValue) => setChecked(newValue)}
+          value={checked}
+        >
+          <RadioButton.Item label="Male" value="male" />
+          <RadioButton.Item label="Female" value="female" />
+        </RadioButton.Group> */}
+        <View className="my-2">
+          <TextInput
+            className="bg-gray-300"
+            placeholder="Date"
+            value={formData.password}
+            onChangeText={(text) => handleInputChange("password", text)}
+          />
+        </View>
+        <View className="my-2">
+          <TextInput
+            className="bg-gray-300"
+            placeholder="Password"
+            textContentType="password"
+            secureTextEntry={true}
+            value={formData.password}
+            onChangeText={(text) => handleInputChange("password", text)}
+          />
+        </View>
+        <View className="my-2">
+          <TextInput
+            className="bg-gray-300"
+            placeholder="Confirm Password"
+            textContentType="password"
+            secureTextEntry={true}
+            value={formData.password}
+            onChangeText={(text) => handleInputChange("password", text)}
+          />
+        </View>
+
+        <SubmitButton onPress={handleSubmit} text="Submit" />
+        {/* signup cta */}
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            marginVertical: 20,
+          }}
+        >
+          <Text style={{ color: "#000" }}>Do you have an account?</Text>
+          <Pressable onPress={() => alert("Sign Up")}>
+            <Text
+              style={{ color: "#14c0d8", fontWeight: "bold", fontSize: 18 }}
+            >
+              Login
+            </Text>
+          </Pressable>
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -297,7 +180,7 @@ const submitBtnStyles = StyleSheet.create({
     padding: 15,
     borderRadius: 5,
     marginHorizontal: 14,
-    width: "90%",
+    width: "100%",
     /* Add more styles as needed */
   },
   text: {

@@ -11,6 +11,7 @@ import {
 import logo from "../../assets/logo.jpeg";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
+import { login } from "../../api";
 
 const SubmitButton = ({ onPress, text }) => {
   return (
@@ -31,10 +32,16 @@ const AdminLoginScreen = () => {
     setFormData({ ...formData, [key]: value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Handle form submission here
-    console.log("Form data submitted:", formData);
-    navigation.navigate("Admin");
+    try {
+      const userData = await login(formData.username, formData.password);
+      console.log({ userData });
+      navigation.navigate("Admin");
+    }
+    catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -81,14 +88,14 @@ const AdminLoginScreen = () => {
             </Text>
           </View>
           <View style={{ position: "relative" }}>
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            secureTextEntry={true}
-            value={formData.password}
-            onChangeText={(text) => handleInputChange("password", text)}
-          />
-          <Text
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              secureTextEntry={true}
+              value={formData.password}
+              onChangeText={(text) => handleInputChange("password", text)}
+            />
+            <Text
               style={{
                 position: "absolute",
                 top: -8,

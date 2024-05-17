@@ -17,6 +17,8 @@ import {
   Entypo,
 } from "@expo/vector-icons";
 
+import { styled } from "nativewind";
+
 import Header from "../components/Header";
 import ResultsScreen from "./Results";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -26,14 +28,17 @@ import AppointmentsScreen from "./Appointments";
 const Tab = createMaterialBottomTabNavigator();
 const ParentStack = createNativeStackNavigator();
 
+const StyledView = styled(View);
+const StyledText = styled(Text);
+
 const ThreeColumnCards = () => {
   const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <View style={styles.card}>
+    <StyledView className="flex flex-wrap flex-row gap-4">
+      <StyledView className="bg-white rounded w-1/3">
         <TouchableOpacity
           style={{
-            paddingVertical: 60,
+            paddingVertical: 40,
             alignItems: "center",
           }}
           onPress={() => navigation.navigate("Results")}
@@ -41,11 +46,11 @@ const ThreeColumnCards = () => {
           <MaterialCommunityIcons name="heart-pulse" size={35} color="black" />
           <Text style={styles.title}>Results</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.card}>
+      </StyledView>
+      <StyledView className="bg-white rounded w-1/3">
         <TouchableOpacity
           style={{
-            paddingVertical: 60,
+            paddingVertical: 40,
             alignItems: "center",
           }}
           onPress={() => {
@@ -57,22 +62,22 @@ const ThreeColumnCards = () => {
           <MaterialCommunityIcons name="medical-bag" size={35} color="black" />
           <Text style={styles.title}>Treatments</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.card}>
+      </StyledView>
+      <StyledView className="flex bg-white rounded w-1/3">
         <View
           style={{
-            paddingVertical: 60,
+            paddingVertical: 40,
             alignItems: "center",
           }}
         >
           <MaterialCommunityIcons name="receipt" size={35} color="black" />
           <Text style={styles.title}>Receipt</Text>
         </View>
-      </View>
-      <View style={styles.card}>
+      </StyledView>
+      <StyledView className="flex bg-white rounded w-1/3">
         <TouchableOpacity
           style={{
-            paddingVertical: 60,
+            paddingVertical: 40,
             alignItems: "center",
           }}
           onPress={() => {
@@ -82,8 +87,8 @@ const ThreeColumnCards = () => {
           <MaterialCommunityIcons name="medical-bag" size={35} color="black" />
           <Text style={styles.title}>Buy Medication</Text>
         </TouchableOpacity>
-      </View>
-    </View>
+      </StyledView>
+    </StyledView>
   );
 };
 
@@ -188,6 +193,28 @@ function HomeScreen() {
               Welcome back, User!
             </Text>
           </View>
+
+          <StyledView className="w-full">
+          <StyledView className="flex p-4 mx-4 my-4 bg-[#14c0d8] rounded-lg h-min-[300px]">
+            {/* heading */}
+            <StyledText className="font-medium text-2xl text-white">
+              Personalized Health Care
+            </StyledText>
+            <StyledText className="font-sm text-md text-white">
+              lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+              vitae nunc eget lorem ultricies. Donec vitae nunc eget lorem
+              ultricies. Donec vitae nunc eget lorem ultricies.
+            </StyledText>
+            {/* submit button */}
+            <StyledView className="flex items-end mt-4">
+              <StyledView className="flex items-center  w-1/2 py-3.5 bg-white rounded-lg">
+                <StyledText className="font-md text-md text-[#14c0d8]">
+                  Learn More
+                </StyledText>
+               </StyledView>
+               </StyledView>
+          </StyledView>
+          </StyledView>
           <ThreeColumnCards />
 
           <View style={{ width: "100%", marginTop: 20 }}>

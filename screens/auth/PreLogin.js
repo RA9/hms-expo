@@ -5,20 +5,26 @@ import {
   Text,
   Pressable,
   StyleSheet,
-  Image,
   ImageBackground,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import logo from "../../assets/logo.jpeg";
+import logo from "../../assets/logo3.png";
 import { useNavigation } from "@react-navigation/native";
+import { styled } from "nativewind";
+import { Image } from "expo-image";
 
 const Btn = ({ onPress, text }) => {
   return (
-    <Pressable onPress={onPress} style={submitBtnStyles.button}>
+    <Pressable onPress={onPress} className="w-full bg-[#14c0d8] p-4 m-4 rounded-lg">
       <Text style={submitBtnStyles.text}>{text}</Text>
     </Pressable>
   );
 };
+
+
+const StyledText = styled(Text);
+const StyledView = styled(View);
+const StyledImage = styled(Image);
 
 const PreLoginScreen = () => {
   const [formData, setFormData] = useState({
@@ -48,52 +54,16 @@ const PreLoginScreen = () => {
   return (
     <View style={{ flex: 1, height: "100%" }}>
       <StatusBar style="auto" />
-      <ImageBackground
-        source={require("../../assets/ps.png")}
-        style={{
-          height: "100%",
-          flex: 1,
-          resizeMode: "cover",
-          justifyContent: "center",
-        }}
+      <StyledView
+        className="flex flex-col justify-center items-center py-48 mx-4"
       >
-        <View style={styles.container}>
-          <View style={{ alignItems: "center", justifyContent: "center" }}>
-            <Text
-              style={{ fontSize: 24, fontWeight: "bold", marginBottom: 16 }}
-            >
-              Login
-            </Text>
-          </View>
-
-          {/* Add two buttons */}
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 10,
-              marginHorizontal: 8,
-              height: 130,
-            }}
-          >
-            <Btn onPress={handlePatient} text="Patient" />
-            <Btn onPress={handleAdmin} text="Administrator" />
-          </View>
-        </View>
-      </ImageBackground>
-      {/* copyright */}
-      <View
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#fff",
-        }}
-      >
-        <Text style={{ fontSize: 12, fontWeight: "bold", marginBottom: 16 }}>
-          © {new Date().getFullYear()} All Rights Reserved
-        </Text>
-      </View>
+        <StyledImage
+          source={logo}
+          style={{ width: 300, height: 200, marginBottom: 20 }}
+        />
+        <Btn onPress={handlePatient} text="Patient" />
+        <Btn onPress={handleAdmin} text="Administrator" />
+      </StyledView>
     </View>
   );
 };
@@ -117,12 +87,10 @@ const submitBtnStyles = StyleSheet.create({
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    backgroundColor: "#fff",
     borderRadius: 8,
     marginTop: 20,
     marginHorizontal: 20,
     shadowOpacity: 0.5,
-    height: "40%",
   },
 });
 

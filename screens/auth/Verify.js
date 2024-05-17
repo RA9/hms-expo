@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
+import { styled } from "nativewind";
 
 const SubmitBtn = ({ onPress, text }) => {
   return (
@@ -18,6 +19,9 @@ const SubmitBtn = ({ onPress, text }) => {
     </Pressable>
   );
 };
+
+const StyledView = styled(View)
+
 
 const VerificationComponent = () => {
   const [verificationCode, setVerificationCode] = useState("");
@@ -32,18 +36,11 @@ const VerificationComponent = () => {
   return (
     <View style={{ height: "100%" }}>
       <StatusBar style="auto" />
-      <ImageBackground
-        source={require("../../assets/nss.jpg")}
-        style={{
-          flex: 1,
-          resizeMode: "cover",
-          justifyContent: "center",
-        }}
-      >
+        <StyledView className="my-8" />
         <View
           style={{
+            marginVertical: 80,
             marginHorizontal: 10,
-            backgroundColor: "#fff",
             borderRadius: 10,
             padding: 10,
             paddingVertical: 30,
@@ -151,22 +148,21 @@ const VerificationComponent = () => {
               marginTop: 10,
             }}
           >
-            <Text style={{ color: "#000" }}>Didn't receive a code?</Text>
+            <Text style={{ color: "#000" }}>Didn't receive a code? </Text>
             <Pressable onPress={() => handleVerification()}>
-              <Text style={{ color: "#00f", fontWeight: "bold", fontSize: 18 }}>
+              <Text style={{ color: "#14c0d8", fontWeight: "bold", fontSize: 18 }}>
                 Resend
               </Text>
             </Pressable>
           </View>
         </View>
-      </ImageBackground>
     </View>
   );
 };
 
 const submitBtnStyles = StyleSheet.create({
   button: {
-    backgroundColor: "#007bff" /* Blue background */,
+    backgroundColor: "#14c0d8" /* Blue background */,
     padding: 15,
     borderRadius: 5,
     marginHorizontal: 14,
