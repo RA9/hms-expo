@@ -34,8 +34,8 @@ const StyledText = styled(Text);
 const ThreeColumnCards = () => {
   const navigation = useNavigation();
   return (
-    <StyledView className="flex flex-wrap flex-row gap-4">
-      <StyledView className="bg-white rounded w-1/3">
+    <StyledView style={styles.container}>
+      <StyledView style={styles.card}>
         <TouchableOpacity
           style={{
             paddingVertical: 40,
@@ -47,7 +47,7 @@ const ThreeColumnCards = () => {
           <Text style={styles.title}>Results</Text>
         </TouchableOpacity>
       </StyledView>
-      <StyledView className="bg-white rounded w-1/3">
+      <StyledView style={styles.card}>
         <TouchableOpacity
           style={{
             paddingVertical: 40,
@@ -63,7 +63,7 @@ const ThreeColumnCards = () => {
           <Text style={styles.title}>Treatments</Text>
         </TouchableOpacity>
       </StyledView>
-      <StyledView className="flex bg-white rounded w-1/3">
+      <StyledView style={styles.card}>
         <View
           style={{
             paddingVertical: 40,
@@ -74,7 +74,7 @@ const ThreeColumnCards = () => {
           <Text style={styles.title}>Receipt</Text>
         </View>
       </StyledView>
-      <StyledView className="flex bg-white rounded w-1/3">
+      <StyledView style={styles.card}>
         <TouchableOpacity
           style={{
             paddingVertical: 40,
@@ -195,25 +195,19 @@ function HomeScreen() {
           </View>
 
           <StyledView className="w-full">
-          <StyledView className="flex p-4 mx-4 my-4 bg-[#14c0d8] rounded-lg h-min-[300px]">
-            {/* heading */}
-            <StyledText className="font-medium text-2xl text-white">
-              Personalized Health Care
-            </StyledText>
-            <StyledText className="font-sm text-md text-white">
-              lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              vitae nunc eget lorem ultricies. Donec vitae nunc eget lorem
-              ultricies. Donec vitae nunc eget lorem ultricies.
-            </StyledText>
-            {/* submit button */}
-            <StyledView className="flex items-end mt-4">
-              <StyledView className="flex items-center  w-1/2 py-3.5 bg-white rounded-lg">
-                <StyledText className="font-md text-md text-[#14c0d8]">
-                  Learn More
-                </StyledText>
-               </StyledView>
-               </StyledView>
-          </StyledView>
+            <StyledView className="flex p-4 py-8 mx-4 my-4 bg-[#14c0d8] rounded-lg h-min-[400px]">
+              {/* heading */}
+              <StyledText className="font-medium text-2xl text-white">
+                Personalized Health Care
+              </StyledText>
+              <StyledText className="font-sm text-md text-white">
+                lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                vitae nunc eget lorem ultricies. Donec vitae nunc eget lorem
+                ultricies. Donec vitae nunc eget lorem ultricies.
+              </StyledText>
+              {/* submit button */}
+
+            </StyledView>
           </StyledView>
           <ThreeColumnCards />
 
