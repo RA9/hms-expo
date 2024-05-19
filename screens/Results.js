@@ -92,7 +92,7 @@ function TreatmentsScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }}>
-        <Header />
+        <Header name="Results" />
         <TreatmentList treatments={treatments} />
       </ScrollView>
     </SafeAreaView>

@@ -38,6 +38,22 @@ const ThreeColumnCards = () => {
   const navigation = useNavigation();
   return (
     <StyledView style={styles.container}>
+       <StyledView style={styles.card}>
+        <TouchableOpacity
+          style={{
+            paddingVertical: 40,
+            alignItems: "center",
+          }}
+          onPress={() => {
+            navigation.navigate("Vendors");
+          }}
+        >
+          <MaterialCommunityIcons name="medical-bag" size={35} color="#14c0d8" />
+          <Text style={styles.title}>Buy</Text>
+          <Text style={styles.title}>Medication</Text>
+
+        </TouchableOpacity>
+      </StyledView>
       <StyledView style={styles.card}>
         <TouchableOpacity
           style={{
@@ -46,7 +62,7 @@ const ThreeColumnCards = () => {
           }}
           onPress={() => navigation.navigate("Results")}
         >
-          <MaterialCommunityIcons name="heart-pulse" size={35} color="black" />
+          <MaterialCommunityIcons name="heart-pulse" size={35} color="#14c0d8" />
           <Text style={styles.title}>Results</Text>
         </TouchableOpacity>
       </StyledView>
@@ -62,35 +78,21 @@ const ThreeColumnCards = () => {
             });
           }}
         >
-          <MaterialCommunityIcons name="medical-bag" size={35} color="black" />
+          <MaterialCommunityIcons name="medical-bag" size={35} color="#14c0d8" />
           <Text style={styles.title}>Treatments</Text>
         </TouchableOpacity>
       </StyledView>
-      <StyledView style={styles.card}>
+      {/* <StyledView style={styles.card}>
         <View
           style={{
             paddingVertical: 40,
             alignItems: "center",
           }}
         >
-          <MaterialCommunityIcons name="receipt" size={35} color="black" />
+          <MaterialCommunityIcons name="receipt" size={35} color="#14c0d8" />
           <Text style={styles.title}>Receipt</Text>
         </View>
-      </StyledView>
-      <StyledView style={styles.card}>
-        <TouchableOpacity
-          style={{
-            paddingVertical: 40,
-            alignItems: "center",
-          }}
-          onPress={() => {
-            navigation.navigate("Vendors");
-          }}
-        >
-          <MaterialCommunityIcons name="medical-bag" size={35} color="black" />
-          <Text style={styles.title}>Buy Medication</Text>
-        </TouchableOpacity>
-      </StyledView>
+      </StyledView> */}
     </StyledView>
   );
 };
@@ -242,7 +244,7 @@ function HomeScreen() {
                     color: "#6200EE",
                   }}
                 >
-                  <FontAwesome5 name="folder-plus" size={35} color="black" />
+                  <FontAwesome5 name="folder-plus" size={35} color="#14c0d8" />
                 </Text>
               </TouchableOpacity>
             </View>
@@ -443,10 +445,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingTop: 20,
     width: "100%",
-    flexWrap: "wrap",
+    flexWrap: "nowrap",
   },
   card: {
-    flexBasis: "46%",
+    flexBasis: "30%",
     backgroundColor: "#fff",
     borderRadius: 8,
     padding: 20,
@@ -463,9 +465,10 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
     marginBottom: 10,
+    color: "black",
   },
   shadow: {
     shadowColor: "#14c0d8",
