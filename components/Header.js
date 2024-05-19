@@ -1,16 +1,17 @@
 import React from "react";
-import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Image, StyleSheet, Text } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const Header = () => {
+const Header = (props) => {
     return (
       <View style={headerStyles.container}>
         <TouchableOpacity style={headerStyles.menuButton}>
-          <Icon name="bars" size={24} color="#000" />
+          <Icon name="bars" size={30} color="#000" />
         </TouchableOpacity>
+       { props.name && <Text style={{ fontSize: 20, fontWeight: "bold" }}>{props.name}</Text> } 
         <View style={headerStyles.rightSection}>
           <TouchableOpacity style={headerStyles.notificationButton}>
-            <Icon name="bell" size={24} color="#000" />
+            <Icon name="bell" size={30} color="#000" />
           </TouchableOpacity>
           <Image
             source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}

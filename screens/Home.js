@@ -9,7 +9,9 @@ import {
   Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+// import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 import {
   MaterialCommunityIcons,
   FontAwesome5,
@@ -24,8 +26,9 @@ import ResultsScreen from "./Results";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ViewResultScreen from "./ViewResult";
 import AppointmentsScreen from "./Appointments";
+import { shadow } from "react-native-paper";
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 const ParentStack = createNativeStackNavigator();
 
 const StyledView = styled(View);
@@ -172,7 +175,7 @@ function HomeScreen() {
   return (
     <SafeAreaView>
       <ScrollView>
-        <Header />
+        <Header name="Dashboard" />
         <View
           style={{
             alignItems: "center",
@@ -326,21 +329,60 @@ function HomeStack() {
   );
 }
 
+function CustomTabBar({children, onPress}) {
+  return (
+    <TouchableOpacity
+      style={{
+        top: -30,
+        justifyContent: "center",
+        alignItems: "center",
+        ...styles.shadow,
+      }}
+     onPress={onPress}>
+      <View style={{
+        width: 60,
+        height: 60,
+        borderRadius: 35,
+        backgroundColor: "#14c0d8",
+      }}>
+      {children}
+      </View>
+    </TouchableOpacity>
+  )
+}
 function HomeNavigator() {
   return (
     <>
       <Tab.Navigator
         initialRouteName="Dashboard"
-        activeColor="#6200EE"
-        barStyle={{ backgroundColor: "#fff" }}
+        // activeColor="#6200EE"
+        screenOptions={{
+          headerShown: false,
+          tabBarShowLabel: false,
+          style: {
+            position: "absolute",
+            bottom: 25,
+            left: 20,
+            right: 20,
+            elevation: 0,
+            backgroundColor: "#fff",
+            borderRadius: 15,
+            height: 90,
+            ...styles.shadow,
+          },
+        }}
+        // barStyle={{ backgroundColor: "#fff" }}
       >
         <Tab.Screen
           name="Dashboard"
           component={HomeScreen}
           options={{
-            tabBarLabel: "Home",
-            tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="home" color={color} size={26} />
+            tabBarShowLabel: false,
+            tabBarIcon: ({ color, focused }) => (
+              <StyledView className="items-center justify-center">
+                <MaterialCommunityIcons name="home" color={focused ? "#14c0d8" : "#000"} size={30} />
+                {/* <StyledText className={`text-xs font-sm text-[${color}]`}>Home</StyledText> */}
+              </StyledView>
             ),
           }}
         />
@@ -348,10 +390,16 @@ function HomeNavigator() {
           name="Appointments"
           component={AppointmentsScreen}
           options={{
-            tabBarLabel: "Appointments",
+            // tabBarLabel: "Appointments",
+            showLabel: false,
             tabBarIcon: ({ color }) => (
-              <Entypo name="back-in-time" size={26} color={color} />
+              <Entypo name="back-in-time" size={30} color="#fff" />
             ),
+            tabBarButton: (props) => (
+              <CustomTabBar {...props} >
+                {/* <Entypo name="back-in-time" size={26} color="#fff" /> */}
+              </CustomTabBar>
+            )
           }}
         />
         <Tab.Screen
@@ -359,11 +407,11 @@ function HomeNavigator() {
           component={ResultsScreen}
           options={{
             tabBarLabel: "Results",
-            tabBarIcon: ({ color }) => (
+            tabBarIcon: ({ color, focused }) => (
               <MaterialCommunityIcons
                 name="format-list-bulleted"
-                color={color}
-                size={26}
+                color={focused ? "#14c0d8" : "#000"}
+                size={30}
               />
             ),
           }}
@@ -419,6 +467,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 10,
   },
+  shadow: {
+    shadowColor: "#14c0d8",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
+  }
 });
 
 export default HomeNavigator;
