@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { styled } from "nativewind";
 import { TextInput } from 'react-native-paper';
 import { useFonts } from "expo-font";
-
+import { login } from "../../api";
 
 
 
@@ -44,6 +44,8 @@ const LoginScreen = () => {
   const handleSubmit = () => {
     // Handle form submission here
     console.log("Form data submitted:", formData);
+
+     
   };
 
   const [fontsLoaded, fontError] = useFonts({

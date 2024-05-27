@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState, useContext} from 'react';
 import {
   View,
   TextInput,
@@ -11,7 +11,8 @@ import {
 import logo from "../../assets/logo.jpeg";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
-import { login } from "../../api";
+import { Context as AuthContext } from "../../context/AuthContext";
+
 
 const SubmitButton = ({ onPress, text }) => {
   return (
@@ -28,6 +29,9 @@ const AdminLoginScreen = () => {
     password: "",
   });
 
+  const {state, signin} = useContext(AuthContext);
+
+
   const handleInputChange = (key, value) => {
     setFormData({ ...formData, [key]: value });
   };
@@ -35,9 +39,10 @@ const AdminLoginScreen = () => {
   const handleSubmit = async () => {
     // Handle form submission here
     try {
-      const userData = await login(formData.username, formData.password);
-      console.log({ userData });
-      navigation.navigate("Admin");
+      // const userData = await login(formData.username, formData.password);
+      signin({email: formData.username, password: formData.password})
+      // console.log({ userData });
+      // navigation.navigate("Admin");
     }
     catch (error) {
       console.log(error);

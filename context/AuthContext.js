@@ -1,0 +1,52 @@
+import createDataContext from './createDataContext';
+import React from 'react';
+import { login } from "../api";
+
+
+const authReducer = (state, action) => {
+  switch (action.type) {
+    case 'signout':
+      return {token: null, email: ''};
+    case 'signin':
+    case 'signup':
+      return {
+        token: action.payload.token,
+        email: action.payload.email,
+      };
+    default:
+      return state;
+  }
+};
+
+const signup = dispatch => {
+  return ({email, password}) => {
+    console.log('Signup');
+  };
+};
+
+const signin =  dispatch => {
+  return async ({email, password}) => {
+    // Do some API Request here
+    console.log('Signin', email, password);
+    await login(email, password);
+    dispatch({
+      type: 'signin',
+      payload: {
+        token: 'some access token here',
+        email,
+      },
+    });
+  };
+};
+
+const signout = dispatch => {
+  return () => {
+    dispatch({type: 'signout'});
+  };
+};
+
+export const {Provider, Context} = createDataContext(
+  authReducer,
+  {signin, signout, signup},
+  {token: null, email: ''},
+);
