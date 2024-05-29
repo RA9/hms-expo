@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import {
   View,
   Text,
@@ -18,6 +18,7 @@ import {
   Ionicons,
   Octicons,
 } from "@expo/vector-icons";
+import { Context as AuthContext } from "../../context/AuthContext";
 
 import Header from "../../components/Header";
 import PatientsScreen from "./Patients";
@@ -149,6 +150,24 @@ function AppointmentCard() {
 function HomeScreen() {
   const [searchQuery, setSearchQuery] = React.useState("");
 
+  const { state } = useContext(AuthContext);
+
+  const [user, setUser] = useState(state?.user);
+
+
+  useEffect(() => {
+    async function checkToken() {
+      if (user?.token) {
+        return;
+      }
+
+      const newValue = await AsyncStorage.getItem('pb_auth');
+      setUser(newValue.model);
+    }
+
+    checkToken();
+  }, []);
+
   const onChangeSearch = (query) => setSearchQuery(query);
 
   // use effect to filter patients
@@ -183,7 +202,7 @@ function HomeScreen() {
                 padding: 20,
               }}
             >
-              Welcome back, User!
+              Welcome backs, {user?.name || "No name"}!
             </Text>
           </View>
           {/* Search input  component */}

@@ -1,5 +1,9 @@
-import PocketBase, { AsyncAuthStore } from 'pocketbase';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PocketBase, { AsyncAuthStore } from 'pocketbase';
+
+import eventsource from "react-native-sse";
+
+global.EventSource = eventsource;
 
 const store = new AsyncAuthStore({
     save: async (serialized) => AsyncStorage.setItem('pb_auth', serialized),
@@ -13,7 +17,6 @@ export async function login(email, password) {
         const userData = await pocketbase.collection('users').authWithPassword(email, password, {
             expand: "role"
         });
-        console.log({userData});
         return userData || null;
     } catch (error) {
         console.log(error);
